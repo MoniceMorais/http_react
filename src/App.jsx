@@ -12,7 +12,7 @@ function App() {
   const [products, setProducts] = useState([]);
 
   // 4- Custom hook para resgate de dados
-  const { data: items, httpConfig, loading } = useFetch(url);
+  const { data: items, httpConfig, loading, error } = useFetch(url);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -61,10 +61,12 @@ function App() {
   return (
     <>
       <h1>Lista de produtos</h1>
+
       {/* 6- Loading */}
       {loading && <p>Carregando dados...</p>}
+      {error && <p>{error}</p>}
 
-      {!loading && (
+      {!error && (
         <ul>
           {items && items.map((product) => (
             <li key={product.id}>{product.name} - R$ {product.price}</li>
