@@ -58,6 +58,11 @@ function App() {
     setPrice("");
   }
 
+  // 9- Desafio 6
+  const handleRemove = (id) => {
+    httpConfig(id,"DELETE");
+  };
+
   return (
     <>
       <h1>Lista de produtos</h1>
@@ -69,7 +74,10 @@ function App() {
       {!error && (
         <ul>
           {items && items.map((product) => (
-            <li key={product.id}>{product.name} - R$ {product.price}</li>
+            <li key={product.id}>
+              {product.name} - R$ {product.price}
+              <button onClick={() => handleRemove(product.id)}>Excluir</button>
+            </li>
           ))}
         </ul>
       )}
@@ -96,7 +104,7 @@ function App() {
             />
           </label>
           {/* 7 -  State de loading do POST */}
-          {loading && <input type="submit" value="Aguarde ... " disabled/>}
+          {loading && <input type="submit" value="Aguarde ... " disabled />}
           {!loading && <input type="submit" value="Criar" />}
         </form>
       </div>
